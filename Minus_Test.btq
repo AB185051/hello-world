@@ -1,0 +1,20 @@
+bteq << EOF
+
+.LOGON 153.65.14.249/abhishekb,abhishekb;
+
+.SET MAXERROR 1
+.SET ERRORLEVEL 3807 SEVERITY 0; /* Ignore "Table does not exist" error  */
+
+SELECT * FROM ETL_META.OPB_SUBJECT
+minus
+select * FROM DEVOPS.OPB_SUBJECT_DEVOPS_TEST;
+
+SELECT * FROM DEVOPS.OPB_SUBJECT_DEVOPS_TEST
+minus
+select * FROM ETL_META.OPB_SUBJECT;
+
+
+.LOGOFF;
+.QUIT;
+
+EOF
